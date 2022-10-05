@@ -1,6 +1,7 @@
 # Resources: 
 # https://answers.opencv.org/question/200861/drawing-a-rectangle-around-a-color-as-shown/
 # https://docs.opencv.org/4.x/df/d9d/tutorial_py_colorspaces.html
+# Added BGR image masking and threshold contour area condition for drawing
 
 import cv2 as cv
 import numpy as np
@@ -29,8 +30,6 @@ while(1):
             (xg,yg,wg,hg) = cv.boundingRect(blue_area)
             cv.rectangle(frame,(xg,yg),(xg+wg, yg+hg),(0,255,0),2)
 
-    # Show thresholded image
-    # cv.imshow('frame2', mask) 
     cv.imshow('frame', frame)
     
     k = cv.waitKey(5) & 0xFF
