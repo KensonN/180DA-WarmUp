@@ -1,5 +1,8 @@
 import paho.mqtt.client as mqtt
 import numpy as np
+from time import sleep
+from random import randint
+from datetime import datetime
 
 # 0. define callbacks - functions that run when events happen. 
 # The callback for when the client receives a CONNACK response from the server.
@@ -44,9 +47,16 @@ client.loop_start()
 
 # 5. use publish() to publish messages to the broker. 
 # payload must be a string, bytearray, int, float or None.
-for i in range(10):  
-  client.publish('ece180d/test', float(np.random.random(1)), qos=1)
 
+now = datetime.now()
+
+current_time = now.strftime("%H:%M:%S")
+
+while True:
+  now = datetime.now()
+  current_time = now.strftime("%H:%M:%S")
+  client.publish('ece180d/test/kenson/' + str(randint(1,2)), "client 2: " + current_time, qos=1)
+  sleep(randint(100,1000)/1000)
 # 6. use disconnect() to disconnect from the broker. 
 client.loop_stop()
 client.disconnect()
